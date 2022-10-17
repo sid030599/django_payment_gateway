@@ -1,0 +1,37 @@
+{% extends 'myapp/base.html' %} {% block content %}
+    
+    <div class="container">
+      <div class="col text-center" >
+        <h1>This is Home page</h1>
+      </div>
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Specifications</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for pro in products %}  
+              <tr>
+                <td>{{pro.name}}</td>
+                <td><img src="/image/{{pro.image}}" width="120"/></td>
+                <td>{{pro.price}}</td>
+                <td>{{pro.specification}}</td>
+
+                <td>
+                  <form action="#" method="POST">{% csrf_token %}
+                  <button type="submit" name="submit" id="pay-btn" value="{{pro.id}}">Add to cart</button>
+                  </form>
+                </td>
+                
+              </tr>
+              {% endfor %} 
+            </tbody>
+        </table>	
+        </div>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  
+{% endblock content%}
